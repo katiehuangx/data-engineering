@@ -321,7 +321,7 @@ transformed as (
 select * from transformed
 ```
 
-```
+```sql
 -- models/staging/jaffle_shop/stg_jaffle_shop_orders.sql
 with
 
