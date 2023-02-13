@@ -10,7 +10,7 @@ _Note: Code has been updated with correct source and formatting. All models buil
 
 ```sql
 -- customer_orders.sql
-WITH 
+WITH
 
 paid_orders as (
     
@@ -259,12 +259,270 @@ Run `dbt docs generate` and inspect the DAG.
 
 ### Cosmetic Cleanups and CTE Groupings
 
+**Import CTEs at the top**
+
+1. Refactor the cosmetics of the fct_customer_orders model using the following guidelines:
+
+- Add whitespacing
+- No lines over 80 characters
+- Lowercase keywords
+
+2. Refactor the code to follow this structure:
+
+```sql
+-- WITH statement
+-- Import CTEs
+-- Logical CTEs
+-- Final CTE
+-- Simple Select Statement
+```
+
+Steps to achieve this:
+a. Add a WITH statement to the top of the `fct_customer_orders` model
+b. Add import CTEs after the WITH statement for each source table used in the query
+c. Ensure subsequent FROM statements reference the named CTEs instead of {{ source() }}.
+
 ### Centralizing Logic and Splitting Up Models
 
 **a. Staging Models**
 
+1. Create new staging files for each source:
+- `stg_jaffle_shop__customers.sql` & `stg_jaffle_shop__orders.sql` under `models > staging > jaffle_shop`
+- `stg_stripe__payments.sql` under `models > staging > stripe`
+
+2. Make necessary changes in each file:
+- Change `id` fields to `<object>_id`
+- Make potentially clashing fields more specific, i.e. `status` becomes `order_status`
+- Apply rounding or simple transformations, i.e. change `amount` to `round(amount / 100.0, 2) as payment_amount`
+    
+```sql
+-- models/staging/jaffle_shop/stg_jaffle_shop_customers.sql
+with 
+
+source as (
+    
+    select * from {{ source('jaffle_shop', 'customers') }}
+    
+),
+    
+transformed as (
+
+    select 
+
+        id as customer_id,
+        last_name as surname,
+        first_name as givenname,
+        first_name || ' ' || last_name as full_name
+    
+    from source
+
+)
+
+select * from transformed
+```
+
+```
+-- models/staging/jaffle_shop/stg_jaffle_shop_orders.sql
+with
+
+source as (
+    
+    select * from {{ source('jaffle_shop', 'orders') }}
+
+),
+
+transformed as (
+    select
+        id as order_id,
+        user_id as customer_id,
+        status as order_status,
+        order_date as order_placed_at,
+
+        case
+            when status not in ('returned', 'return_pending') 
+            then order_date
+        end as valid_order_date,
+        
+        row_number() over (
+            partition by user_id 
+            order by order_date, id
+        ) as user_order_seq
+
+    from source
+)
+
+select * from transformed
+```
+
+```sql
+-- models/staging/jaffle_shop/stg_payments.sql
+with 
+
+source as (
+
+    select * from {{ source('jaffle_shop', 'payments') }}
+
+),
+
+transformed as (
+    select 
+        id as payment_id,
+        orderid as order_id,
+        created as payment_created_at,
+        status as payment_status,
+        round(amount/100.0, 2) as payment_amount
+
+    from source
+
+)
+
+select * from transformed
+```
+
+1. Update references in `fct_customer_orders.sql` to point to the new staging models using the `{{ ref('<your_model>') }}` function.
+
+2. Change any column reference from the original column names to the new column names, for example, change id to customer_id.
+
 **b. Intermediate Models / Additional CTEs**
 
+1. Create a new intermediate model to store reusable logic.
+
+2. Add a new file `int_orders_tt.sql` under the `marts/intermediate` folder.
+
+```sql
+-- models/marts/intermediate/int_orders_tt.sql
+with
+
+customers as (
+
+    select * from {{ ref('stg_jaffle_shop_customers') }}
+
+),
+
+orders as (
+
+    select * from {{ ref('stg_jaffle_shop_orders') }}
+
+),
+
+payments as (
+
+    select * from {{ ref('stg_jaffle_shop_payments') }}
+
+),
+
+completed_payments as (
+
+    select 
+        
+        order_id, 
+        max(payment_created_at) as payment_finalized_date, 
+        sum(payment_amount) as total_amount_paid
+        
+    from payments
+
+    where payment_status <> 'fail'
+    group by 1
+
+),
+
+paid_orders as (
+    
+    select 
+
+        orders.order_id,
+        orders.customer_id,
+        orders.order_placed_at,
+        orders.order_status,
+        completed_payments.total_amount_paid,
+        completed_payments.payment_finalized_date,
+        customers.givenname,
+        customers.surname
+    
+    from orders
+    left join completed_payments
+    on orders.order_id = completed_payments.order_id
+
+    left join customers
+    on orders.customer_id = customers.customer_id 
+        
+)
+
+select * from paid_orders
+```
+
+4. Remove helper comments we added for the course (i.e. - Import CTEs)
+
 **c. Final Model**
+
+In the final file, be more explicit with ordering of window function subclause. This fixes a future potential bug where if there are multiple orders placed on the same day for one customer ID, this would cause indeterminate ordering.
+
+```sql
+-- models/core/fct_customer_orders_tt
+with
+
+customers as (
+
+    select * from {{ ref('stg_jaffle_shop_customers') }}
+
+),
+
+paid_orders as (
+    
+    select * from {{ ref('int_orders_tt') }}
+        
+),
+
+final as (
+
+select
+    order_id,
+    customer_id,
+    order_placed_at,
+    order_status,
+    total_amount_paid,
+    payment_finalized_date,
+    givenname,
+    surname,
+
+    -- sales transaction sequence
+    row_number() over (
+        order by order_id) as transaction_seq,
+
+    -- customer sales sequence
+    row_number() over (
+        partition by customer_id 
+        order by order_id) as customer_sales_seq,
+
+    -- new vs returning customers
+    case when (
+        rank() over (
+        partition by customer_id
+        order by order_placed_at, order_id)
+    ) = 1
+    then 'new'
+    else 'return' 
+    end as nvsr,
+
+    -- customer lifetime value
+    sum(total_amount_paid) over (
+        partition by customer_id
+        order by order_placed_at
+    ) as customer_lifetime_value,
+
+    -- first day of sales
+    first_value(order_placed_at) over (
+        partition by customer_id
+        order by order_placed_at
+    ) as fdos
+        
+from paid_orders
+
+)
+
+-- Simple Select Statement
+
+select * from final
+```
 
 ### Auditing
