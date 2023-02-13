@@ -217,18 +217,45 @@ Conduct a `dbt run -m fct_customer_orders_tt` to ensure the model is built in th
 
 n your project, in the root folder, create a file packages.yml. Get the updated package [here](https://hub.getdbt.com/dbt-labs/audit_helper/latest/).
 
+```yml
+packages:
+  - package: dbt-labs/audit_helper
+    version: 0.7.0
+```
+
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/81607668/218355233-1b2d66fd-36d5-4af8-94ec-ea85e11cdfaf.png">
+
 <img width="1438" alt="image" src="https://user-images.githubusercontent.com/81607668/218354873-181096fa-b8a4-4da6-981a-7c6c740fd50f.png">
 
-Hit the Preview button:
+Hit the Preview button.
 
-You will see 1 line output showing 100% match between the two files, because they are exactly the same! You can run the steps (dbt run followed by preview in compare_queries.sql) to ensure any changes you make to the fct_customer_orders.sql file does not have unintended consequences causing a drift between the old and new versions.
+The 1 line output is showing 100% match between the two files, because they are exactly the same. 
 
 <img width="1438" alt="image" src="https://user-images.githubusercontent.com/81607668/218355021-946807d5-cfdf-4039-bd6a-3ebf28f71a35.png">
 
+***
 
-### Implementing Sources
+### Implementing Sources and Choosing a Refactoring Strategy
 
-### Choosing a Refactoring Strategy
+Create a subfolder under models folder called staging.
+
+Under your models > staging folder, create two subfolders - one for each source schema that our original query pulls from. These subfolders are stripe and jaffle_shop.
+
+Then, I create a file under models > staging > jaffle_shop called `src_jaffle_shop.yml`. The other configurations in the file were from the dbt Fundamentals course's project.
+
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/81607668/218363805-048ec489-ba24-4c84-83bc-315b6dd5e878.png">
+
+Create a file under models > staging > stripe called `src_stripe.yml`. 
+
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/81607668/218363845-9c333a00-dbbd-4157-a34f-cb16ae9246b6.png">
+
+Conduct a `dbt run -m fct_customer_orders` to ensure that your sources are configured properly and your model rebuilds in the warehouse.
+
+Run `dbt docs generate` and inspect the DAG. 
+
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/81607668/218363685-fb8821ce-cec5-485e-9ff9-f32fe38bf860.png">
+
+***
 
 ### Cosmetic Cleanups and CTE Groupings
 
