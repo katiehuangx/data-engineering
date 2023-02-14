@@ -2,7 +2,13 @@
 
 ## Refactoring SQL for Modularity [Tutorial]
 
-### 1. Migrating Code
+### 1. Migrating Legacy Code 1:1
+
+**Objectives:**
+- Transfer your legacy code to your dbt project as a `.sql` file in the models folder.
+- Ensure that it can run and build in your data warehouse by running `dbt run`.
+- Depending on the system you're migrating between, you may need to adjust the flavour of SQL in your existing code to successfully build the model.
+
 
 In the dbt project, under the models folder, I create a subfolder called `legacy`. Within the `legacy` folder, I create a file called `customer_orders.sql` with the following query provided by the tutorial.
 
@@ -140,7 +146,18 @@ Hit the Preview button. The 1 line output is showing 100% match between the two 
 
 ***
 
-### 2. Implementing Sources and Choosing a Refactoring Strategy
+### 2 and 3. Implementing Sources and Choosing a Refactoring Strategy
+
+**Objectives of Implementing Sources:**
+- For each of the raw tables referenced in the new model, configure a source to map to those tables.
+- Replace all the explicit table references in your query using the source macro.
+
+**Objectives of Choosing a Refactoring Strategy:**
+Decide on your refactoring strategy:
+- Refactor on top of the existing model - Create a new branch and refactor directly on the model that you created in the steps above.
+- Refactor alongside the existing model - Rename the existing model by prepending it with legacy. Then copy the code into a new file with the original file name.
+
+In this tutorial, we are selecting the second option.
 
 Create a subfolder under models folder called staging.
 
@@ -162,7 +179,12 @@ Run `dbt docs generate` and inspect the DAG.
 
 ***
 
-### 3. Cosmetic Cleanups and CTE Groupings
+### 4. Cosmetic Cleanups and CTE Groupings
+
+Objectives:
+- Create one CTE for each source referenced at the top of your model.
+- Reimplement subqueries as CTEs beneath the source CTEs.
+- Update code to follow your style guide. 
 
 **Import CTEs at the top**
 
@@ -187,7 +209,20 @@ a. Add a WITH statement to the top of the `fct_customer_orders` model
 b. Add import CTEs after the WITH statement for each source table used in the query
 c. Ensure subsequent FROM statements reference the named CTEs instead of {{ source() }}.
 
-### Centralizing Logic and Splitting Up Models
+### 5. Centralizing Transformations and Splitting Up Models
+
+**Objectives:**
+- Structure your SQL into layers of modeling via staging models, intermediate models and final models.
+
+**Staging models**
+- Capture light transformations in staging models on source data. i.e. renaming columns, concatenating fields, converting data types.
+- Update aliases with purposeful names. i.e. from `p` to `paid_customers`.
+- Scan for redundant transformations in the code and migrate into staging models.
+- Build dependencies between the existing model and the newly created staging models.
+
+**CTEs or immediate models**
+- Inspect the grain of the transformations in latest version of the model and look for opportunities to move filters and aggregations into earlier CTEs.
+- Break CTEs into intermediate models if the model is too lengthy or could be reusable.
 
 **a. Staging Models**
 
@@ -430,4 +465,8 @@ from paid_orders
 select * from final
 ```
 
-### Auditing
+### 6. Auditing
+
+**Objectives:**
+- Audit your new model against your old query to ensure that none of the changes you implemented changed the results of the modelling.
+- The goal is for both the original code and your final model to produce the same results.
