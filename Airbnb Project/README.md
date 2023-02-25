@@ -1,3 +1,3 @@
-# Airbnb Project
+# 🛌 Airbnb Project
 
-Data pipeline: Source (Airbnb) -> Data Warehouse (Snowflake) -> Transformation (dbt)
+Data pipeline: Data Warehouse (Snowflake) -> Transformation (dbt) -> BI Tool (Prefect)
