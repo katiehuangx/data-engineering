@@ -72,11 +72,12 @@ The DEV folder is created in Snowflake and Views folder contains all 3 of the vi
 code target/run/dbtlearn/models/dim/dim_listings_cleansed.sql
 ```
 
-## Snapshot
+## Snapshots
 
 Snapshots are created using a snapshot block with configs onto a SELECT statement.
 
 Here's an example of how a snapshot looks like:
+
 <img width="611" alt="image" src="https://user-images.githubusercontent.com/81607668/221782071-35e66952-caa2-4fa1-a678-2d4ea322626f.png">
 
 Snapshot automatically includes the columns `dbt_scd_id`, `dbt_updated_at`, `dbt_valid_from` and `dbt_valid_to`. In the first snapshot, `dbt_valid_to` is `null` because this column contains date of the next most recent changes or snapshot. 
