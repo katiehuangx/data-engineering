@@ -72,6 +72,8 @@ The DEV folder is created in Snowflake and Views folder contains all 3 of the vi
 code target/run/dbtlearn/models/dim/dim_listings_cleansed.sql
 ```
 
+***
+
 ## Snapshots
 
 Snapshots are created using a snapshot block with configs onto a SELECT statement.
@@ -87,6 +89,8 @@ Snapshot automatically includes the columns `dbt_scd_id`, `dbt_updated_at`, `dbt
 Let's say I make a change in id=3176 and ran `dbt snapshot` again. You'll see that `dbt_valid_to` contains the current timestamped and the next line represents id 3176 as well with a null `dbt_valid_to`.
 
 <img width="833" alt="image" src="https://user-images.githubusercontent.com/81607668/221783996-15275e80-e3ac-4fb8-84c1-2882b061f585.png">
+
+***
 
 ## Tests
 
@@ -118,6 +122,8 @@ To apply them, I add the `positive_value` macro to the `schema.yml` referencing 
 
 <img width="1438" alt="Screenshot 2023-03-02 at 1 12 51 PM" src="https://user-images.githubusercontent.com/81607668/222337104-2acedc89-21e6-46c1-a439-f5740022938c.png">
 
+***
+
 ## dbt Packages
 
 I'm using a `dbt utils`[doc](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/) packages specifically the `generate_source_key`[doc](https://github.com/dbt-labs/dbt-utils/tree/1.0.0/#generate_surrogate_key-source) which generates a unique ID based on the specified column IDs.
@@ -141,3 +147,11 @@ Then, I use this function in the `fct_reviews.sql` where I created a unique ID a
 <img width="1022" alt="image" src="https://user-images.githubusercontent.com/81607668/222340279-0d2a97a2-136b-4379-bc42-cb6fdc741ad7.png">
 
 As `fct_reviews.sql` is an incremental, I ran the `dbt run --full-refresh --select fct_reviews` instead of `dbt run` because
+
+***
+
+## Documentation
+
+I ran `dbt docs serve` to open into website.
+
+<img width="1360" alt="image" src="https://user-images.githubusercontent.com/81607668/222343062-d9465f5e-0802-4ed6-8432-b6aa36afd371.png">
