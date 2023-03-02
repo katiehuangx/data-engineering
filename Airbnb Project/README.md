@@ -88,3 +88,31 @@ Let's say I make a change in id=3176 and ran `dbt snapshot` again. You'll see th
 
 <img width="833" alt="image" src="https://user-images.githubusercontent.com/81607668/221783996-15275e80-e3ac-4fb8-84c1-2882b061f585.png">
 
+## Tests
+
+Creating singular tests
+
+```sql
+-- tests/dim_listings_minimum_nights.sql
+SELECT * 
+FROM {{ref ('dim_listings_cleansed')}}
+WHERE minimum_nights < 1
+LIMIT 10
+
+Instead of creating query tests, I can also convert them into macro like below so that I can reuse for other purposes.
+
+```sql
+-- macro/positive_value.sql
+-- A singular test that fails when column_name is less than 1
+
+{% test positive_value(model, column_name) %}
+
+    SELECT * FROM {{ model }}
+    WHERE {{ column_name }} < 1
+
+{% endtest %}
+```
+
+To apply them, I add the `positive_value` macro to the `schema.yml` referencing the `minimum_nights` field.
+
+<img width="1438" alt="Screenshot 2023-03-02 at 1 12 51 PM" src="https://user-images.githubusercontent.com/81607668/222337104-2acedc89-21e6-46c1-a439-f5740022938c.png">
