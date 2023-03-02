@@ -98,6 +98,7 @@ SELECT *
 FROM {{ref ('dim_listings_cleansed')}}
 WHERE minimum_nights < 1
 LIMIT 10
+```
 
 Instead of creating query tests, I can also convert them into custom generic test like below so that I can reuse for other purposes.
 
@@ -116,3 +117,27 @@ Instead of creating query tests, I can also convert them into custom generic tes
 To apply them, I add the `positive_value` macro to the `schema.yml` referencing the `minimum_nights` field.
 
 <img width="1438" alt="Screenshot 2023-03-02 at 1 12 51 PM" src="https://user-images.githubusercontent.com/81607668/222337104-2acedc89-21e6-46c1-a439-f5740022938c.png">
+
+## dbt Packages
+
+I'm using a `dbt utils`[doc](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/) packages specifically the `generate_source_key`[doc](https://github.com/dbt-labs/dbt-utils/tree/1.0.0/#generate_surrogate_key-source) which generates a unique ID based on the specified column IDs.
+
+<img width="893" alt="image" src="https://user-images.githubusercontent.com/81607668/222340554-760c7e0d-2cbc-499e-a59c-e123ca7fcfb6.png">
+
+
+I created a `packages.yml` file with the following package and ran `dbt deps` to install the package.
+
+```yml
+-- packages.yml
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 1.0.0
+```
+
+<img width="733" alt="image" src="https://user-images.githubusercontent.com/81607668/222339997-61556323-9fdc-434e-a5b1-11819dc66442.png">
+
+Then, I use this function in the `fct_reviews.sql` where I created a unique ID as the `review_id` based on the `listing_id`, `review_date`, `reviewer_name`, and `review_text` fields. 
+
+<img width="1022" alt="image" src="https://user-images.githubusercontent.com/81607668/222340279-0d2a97a2-136b-4379-bc42-cb6fdc741ad7.png">
+
+As `fct_reviews.sql` is an incremental, I ran the `dbt run --full-refresh --select fct_reviews` instead of `dbt run` because
