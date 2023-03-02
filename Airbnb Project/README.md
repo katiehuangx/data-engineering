@@ -99,7 +99,7 @@ FROM {{ref ('dim_listings_cleansed')}}
 WHERE minimum_nights < 1
 LIMIT 10
 
-Instead of creating query tests, I can also convert them into macro like below so that I can reuse for other purposes.
+Instead of creating query tests, I can also convert them into custom generic test like below so that I can reuse for other purposes.
 
 ```sql
 -- macro/positive_value.sql
