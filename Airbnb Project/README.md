@@ -2,6 +2,8 @@
 
 Data pipeline: Data Warehouse (Snowflake) -> Transformation (dbt) -> BI Tool (Prefect)
 
+<img width="1371" alt="image" src="https://user-images.githubusercontent.com/81607668/223373076-a320ca6e-b58c-4421-b41e-cda991365772.png">
+
 ## Create Staging Models
 
 Create a `src_listings` model (.sql) in `models/src` folder with the following query in VS Code editor. Save it.
