@@ -1,0 +1,91 @@
+index,location,exported,imported,total,inUS
+0,Texas,635,,566,TRUE
+1,Alabama,268,2,1428,TRUE
+2,North Carolina,158,14,2627,TRUE
+3,South Carolina,139,12,1618,TRUE
+4,Georgia,137,19,3479,TRUE
+5,Puerto Rico,131,,,FALSE
+6,California,130,3,1664,TRUE
+7,South Korea,76,,,FALSE
+8,Tennessee,66,20,1769,TRUE
+9,Kentucky,57,4,1123,TRUE
+10,Mississippi,55,,510,TRUE
+11,Mexico,54,,,FALSE
+12,Louisiana,53,,912,TRUE
+13,West Virginia,50,,565,TRUE
+14,Florida,49,32,2659,TRUE
+15,Arkansas,47,1,695,TRUE
+16,China,28,,,FALSE
+17,New Mexico,27,,636,TRUE
+18,Thailand,20,,,FALSE
+19,Virginia,20,183,3058,TRUE
+20,India,18,,,FALSE
+21,Taiwan,18,,,FALSE
+22,New York,17,390,4002,TRUE
+23,Egypt,15,,,FALSE
+24,Arizona,14,14,2248,TRUE
+25,Bahamas,13,,,FALSE
+26,Indiana,10,20,1877,TRUE
+27,Missouri,9,4,920,TRUE
+28,Ohio,9,33,2670,TRUE
+29,Oklahoma,9,5,1636,TRUE
+30,Pennsylvania,9,228,2821,TRUE
+31,Spain,8,,,FALSE
+32,Haiti,7,,,FALSE
+33,New Jersey,7,270,3022,TRUE
+34,Oman,7,,,FALSE
+35,Illinois,6,8,1114,TRUE
+36,Kuwait,5,,,FALSE
+37,Maryland,4,123,1493,TRUE
+38,Nebraska,4,,120,TRUE
+39,Qatar,4,,,FALSE
+40,Utah,4,56,485,TRUE
+41,Connecticut,3,51,1422,TRUE
+42,Costa Rica,3,,,FALSE
+43,Greece,3,,,FALSE
+44,Idaho,3,,49,TRUE
+45,Kansas,3,1,470,TRUE
+46,Russia,3,,,FALSE
+47,Wisconsin,3,74,542,TRUE
+48,Afghanistan,2,,,FALSE
+49,Colorado,2,71,1773,TRUE
+50,England,2,,,FALSE
+51,Hawaii,2,,69,TRUE
+52,Iowa,2,14,485,TRUE
+53,Massachusetts,2,77,946,TRUE
+54,North Dakota,2,,64,TRUE
+55,South Dakota,2,,24,TRUE
+56,Washington,2,334,1277,TRUE
+57,Aruba,1,,,FALSE
+58,Azerbaijan,1,,,FALSE
+59,Bahrain,1,,,FALSE
+60,Bosnia,1,,,FALSE
+61,British Virgin Islands,1,,,FALSE
+62,Canada,1,,,FALSE
+63,Cayman Islands,1,,,FALSE
+64,Finland,1,,,FALSE
+65,Honduras,1,,,FALSE
+66,Indianapolis,1,,,FALSE
+67,Iran,1,,,FALSE
+68,Ireland,1,,,FALSE
+69,Maine,1,87,545,TRUE
+70,Nevada,1,10,857,TRUE
+71,Nevis,1,,,FALSE
+72,Oregon,1,16,91,TRUE
+73,Saudi Arabia,1,,,FALSE
+74,St. Croix,1,,,FALSE
+75,St. Maarten,1,,,FALSE
+76,St. Simon,1,,,FALSE
+77,St. Thomas,1,,,FALSE
+78,Turkey,1,,,FALSE
+79,United Arab Emirates,1,,,FALSE
+80,Wyoming,1,,52,TRUE
+81,Rhode Island,,87,607,TRUE
+82,Minnesota,,67,958,TRUE
+83,Vermont,,45,510,TRUE
+84,New Hampshire,,33,335,TRUE
+85,Delaware,,29,296,TRUE
+86,Michigan,,12,673,TRUE
+87,Washington DC,,11,336,TRUE
+88,Montana,,,18,TRUE
+89,Alaska,,,15,TRUE
