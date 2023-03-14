@@ -1,10 +1,29 @@
 # 🛌 Airbnb Project
 
+## Objective
+
+## Tools and Technologies
+
+- Data warehouse: Snowflake
+- Transformation: dbt
+- BI: Prefect
+
+## Architecture
+
 Data pipeline: Data Warehouse (Snowflake) -> Transformation (dbt) -> BI Tool (Prefect)
+
+**Data Flow**
+1.
+2.
+3.
+
+**DAG**
 
 <img width="1371" alt="image" src="https://user-images.githubusercontent.com/81607668/223373076-a320ca6e-b58c-4421-b41e-cda991365772.png">
 
-## Create Staging Models
+## Setup
+
+### Create Staging Models
 
 Create a `src_listings` model (.sql) in `models/src` folder with the following query in VS Code editor. Save it.
 
@@ -76,7 +95,7 @@ code target/run/dbtlearn/models/dim/dim_listings_cleansed.sql
 
 ***
 
-## Snapshots
+### Snapshots
 
 Snapshots are created using a snapshot block with configs onto a SELECT statement.
 
@@ -94,7 +113,7 @@ Let's say I make a change in id=3176 and ran `dbt snapshot` again. You'll see th
 
 ***
 
-## Tests
+### Tests
 
 Creating singular tests
 
@@ -126,7 +145,7 @@ To apply them, I add the `positive_value` macro to the `schema.yml` referencing 
 
 ***
 
-## dbt Packages
+### dbt Packages
 
 I'm using a `dbt utils`[doc](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/) packages specifically the `generate_source_key`[doc](https://github.com/dbt-labs/dbt-utils/tree/1.0.0/#generate_surrogate_key-source) which generates a unique ID based on the specified column IDs.
 
@@ -152,7 +171,7 @@ As `fct_reviews.sql` is an incremental, I ran the `dbt run --full-refresh --sele
 
 ***
 
-## Documentation
+### Documentation
 
 I ran `dbt docs serve` to open into website.
 
