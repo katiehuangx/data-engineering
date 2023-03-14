@@ -2,7 +2,7 @@
 
 ## Objective
 
-Create and build data models and deploy database.
+Create and build data models and deploy database. This is a guided project to learn how to use Python and PostgreSQL on Jupyter Notebook to build a database.
 
 ## Tools & Technologies
 - Database: PostgreSQL
