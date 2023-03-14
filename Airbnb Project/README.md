@@ -2,6 +2,8 @@
 
 ## Objective
 
+Work in progress.
+
 ## Tools and Technologies
 
 - Data warehouse: Snowflake
