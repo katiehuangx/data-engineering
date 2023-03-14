@@ -1,0 +1,11 @@
+# Doc | dbt Hub: https://hub.getdbt.com
+# dbt utils: https://hub.getdbt.com/dbt-labs/dbt_utils/latest/
+# great expectations: https://hub.getdbt.com/calogica/dbt_expectations/latest/ | https://github.com/calogica/dbt-expectations
+
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 1.0.0
+
+packages:
+  - package: calogica/dbt_expectations
+    version: [">=0.8.0", "<0.9.0"]

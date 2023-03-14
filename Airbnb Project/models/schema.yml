@@ -1,0 +1,87 @@
+version: 2
+
+models:
+  # dim_listings_cleansed model
+  - name: dim_listings_cleansed
+    description: Cleansed table containing Airbnb listings
+    columns:
+
+      - name: listing_id
+        description: Primary key for the listing
+        tests: # Built-in generic tests
+          - unique
+          - not_null
+
+      - name: host_id
+        description: Foreign key references the host_id table
+        tests:
+          - not_null
+          - relationships: 
+              to: ref('dim_hosts_cleansed')
+              field: host_id
+              # Ensure referential integrity.
+              # Ensures that host_id in dim_listings_cleansed table exists as host_id in dim_hosts_cleansed table
+      
+      - name: room_type
+        description: Type of the apartment / room
+        tests: 
+          - accepted_values:
+              values: ['Entire home/apt',
+                      'Private room',
+                      'Shared room',
+                      'Hotel room']
+      
+      - name: minimum_nights
+        description: '{{ doc("dim_listing_cleansed__minimum_nights") }}'
+        tests:
+          - positive_value
+
+
+  # dim_hosts_cleansed model
+  - name: dim_hosts_cleansed
+    description: Cleansed table containing Airbnb hosts
+    columns:
+
+      - name: host_id
+        description: Primary key for the hosts 
+        tests:
+          - not_null
+          - unique
+
+      - name: host_name
+        description: Name of the host
+        tests:
+          - not_null
+
+      - name: is_superhost
+        description: Defines whether the hosts is a superhost
+        tests:
+          - accepted_values:
+              values: ['t', 'f']
+ # dim_listings_w_hosts model
+  - name: dim_listings_w_hosts
+    description: Cleansed table containing Airbnb listings and hosts
+    tests: 
+      - dbt_expectations.expect_table_row_count_to_equal_other_table:
+          compare_model: source('airbnb', 'listings') # Take note of the indent
+      
+    columns:
+      - name: price
+        tests:
+          # Doc: https://github.com/calogica/dbt-expectations/tree/0.8.2/#expect_column_values_to_be_of_type
+          
+          # Test ensures that price column is always number type
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number # Refer to datawarehouse definition of column
+          
+          # Test ensures that 99% of prices are between $50 and $500
+          - dbt_expectations.expect_column_quantile_values_to_be_between:
+              quantile: .99
+              min_value: 50 
+              max_value: 500
+          
+          # Test ensures that the max price is $500
+          - dbt_expectations.expect_column_max_to_be_between:
+              max_value: 5000 
+              config:
+                severity: warn
