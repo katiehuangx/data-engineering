@@ -34,3 +34,12 @@ be1f885325793532ef8e91ab6c50308363fd18a8ab7a2f50956cd54d88e04aa8
 CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS         PORTS      NAMES
 be1f88532579   postgres   "docker-entrypoint.s…"   5 minutes ago   Up 5 minutes   5432/tcp   some-postgres
 ```
+
+```
+docker ps -- list all images
+docker ps -a -- shows history of run images
+docker run <image_id> -- runs the selected image
+docker stop <image_id> -- runs the selected image
+docker start <image_id> -- starts the selected image
+docker rmi <image_id> -- removes the image from local machine
+```
