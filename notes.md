@@ -39,12 +39,15 @@ be1f88532579   postgres   "docker-entrypoint.s…"   5 minutes ago   Up 5 minute
 docker ps -- list all images
 docker images -- list all images locally
 docker ps -a -- shows current and history of run images
-docker run <image_id> -- runs the selected image
-docker stop <image_id> -- runs the selected image
-docker start <image_id> -- starts the selected image
-docker rmi <image_id> -- removes the image from local machine
+docker run <image_id> -- create new container from image
+
 docker run -d -- run docker detached
-docker run -d -p6000:6379 --run docker image on local host port
+docker run -d -p6000:6379 --run docker image and bind to local host port
+
+docker start <container_id> -- restart stopped container
+
+docker stop <image_id> -- runs the selected image
+docker rmi <image_id> -- removes the image from local machine
 ```
 
 Rename docker image
@@ -52,11 +55,43 @@ Rename docker image
 (base) katiehuang@Katies-MacBook-Air ~ % docker ps
 CONTAINER ID   IMAGE          COMMAND                  CREATED      STATUS      PORTS                    NAMES
 6bddb0f95edb   redis:4.0      "docker-entrypoint.s…"   3 days ago   Up 3 days   0.0.0.0:6001->6379/tcp   strange_keller
+916d08075eda   redis          "docker-entrypoint.s…"   3 days ago   Up 3 days   0.0.0.0:6000->6379/tcp   modest_kowalevski
 
 (base) katiehuang@Katies-MacBook-Air ~ % docker run -d -p6001:6379 --name redis-older redis:4.0
 4e5c0fdb2e584ece759e2e167c6794d67dea9af6b31d45f56afaaa7401555222
 
+(base) katiehuang@Katies-MacBook-Air ~ % docker run -d -p6000:6379 --name redis-latest redis
+45cb9c30e35a2905fd6e2ea34b62346a048e07001b5d15e1abc0df7cae8d2989
+
 (base) katiehuang@Katies-MacBook-Air ~ % docker ps
 CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                    NAMES
-4e5c0fdb2e58   redis:4.0      "docker-entrypoint.s…"   4 seconds ago   Up 2 seconds   0.0.0.0:6001->6379/tcp   redis-older
+45cb9c30e35a   redis          "docker-entrypoint.s…"   3 seconds ago   Up 2 seconds   0.0.0.0:6000->6379/tcp   redis-latest
+4e5c0fdb2e58   redis:4.0      "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:6001->6379/tcp   redis-older
 ```
+
+Get the terminal/log file/configuration/environment of running container for debugging
+```(base) katiehuang@Katies-MacBook-Air ~ % docker exec -it 45cb9c30e35a /bin/bash
+root@45cb9c30e35a:/data# ls
+root@45cb9c30e35a:/data# pwd
+/data
+root@45cb9c30e35a:/data# cd /
+root@45cb9c30e35a:/# ls
+bin  boot  data  dev  etc  home  lib  media  mnt  opt  proc  root  run	sbin  srv  sys	tmp  usr  var
+root@45cb9c30e35a:/# env
+HOSTNAME=45cb9c30e35a
+REDIS_DOWNLOAD_SHA=1dee4c6487341cae7bd6432ff7590906522215a061fdef87c7d040a0cb600131
+PWD=/
+HOME=/root
+REDIS_VERSION=7.0.10
+GOSU_VERSION=1.16
+TERM=xterm
+REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-7.0.10.tar.gz
+SHLVL=1
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+_=/usr/bin/env
+OLDPWD=/data
+root@45cb9c30e35a:/# exit
+exit
+(base) katiehuang@Katies-MacBook-Air ~ %
+```
+
