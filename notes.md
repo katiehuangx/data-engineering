@@ -37,9 +37,26 @@ be1f88532579   postgres   "docker-entrypoint.s…"   5 minutes ago   Up 5 minute
 
 ```
 docker ps -- list all images
-docker ps -a -- shows history of run images
+docker images -- list all images locally
+docker ps -a -- shows current and history of run images
 docker run <image_id> -- runs the selected image
 docker stop <image_id> -- runs the selected image
 docker start <image_id> -- starts the selected image
 docker rmi <image_id> -- removes the image from local machine
+docker run -d -- run docker detached
+docker run -d -p6000:6379 --run docker image on local host port
+```
+
+Rename docker image
+```
+(base) katiehuang@Katies-MacBook-Air ~ % docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED      STATUS      PORTS                    NAMES
+6bddb0f95edb   redis:4.0      "docker-entrypoint.s…"   3 days ago   Up 3 days   0.0.0.0:6001->6379/tcp   strange_keller
+
+(base) katiehuang@Katies-MacBook-Air ~ % docker run -d -p6001:6379 --name redis-older redis:4.0
+4e5c0fdb2e584ece759e2e167c6794d67dea9af6b31d45f56afaaa7401555222
+
+(base) katiehuang@Katies-MacBook-Air ~ % docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                    NAMES
+4e5c0fdb2e58   redis:4.0      "docker-entrypoint.s…"   4 seconds ago   Up 2 seconds   0.0.0.0:6001->6379/tcp   redis-older
 ```
