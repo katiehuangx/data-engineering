@@ -12,10 +12,11 @@ In this project, I designed and implemented an end-to-end data pipeline that con
 ## Technologies
 
 To implement this data pipeline, I leveraged a range of technologies, including:
-- Extraction and transformation - Python, Jupyter Notebook, Google BigQuery
-- Storage - Google Storage
-- Orchestration - [Mage](https://www.mage.ai)
-- Dashboard - [Looker Studio](https://lookerstudio.google.com)
+- Programming language: Python, SQL
+- Extraction and transformation: Jupyter Notebook, Google BigQuery
+- Storage: Google Storage
+- Orchestration: [Mage](https://www.mage.ai)
+- Dashboard: [Looker Studio](https://lookerstudio.google.com)
 
 ## Dataset Used
 
@@ -24,7 +25,7 @@ TLC Trip Record Data Yellow and green taxi trip records include fields capturing
 More info about dataset can be found here:
 - Website: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
 - Data Dictionary: https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
-- Raw Data: 
+- Raw Data: https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/uber_data.csv
 
 ## Data Pipeline
 
