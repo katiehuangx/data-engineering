@@ -37,6 +37,8 @@ More info about dataset can be found here:
 
 ## Dashboard
 
+<iframe width="600" height="450" src="https://lookerstudio.google.com/embed/reporting/2656f232-bf58-480b-b5de-86170cd6d671/page/cdGPD" frameborder="0" style="border:0" allowfullscreen></iframe>
+
 ![Dashoard Pg 1](https://user-images.githubusercontent.com/81607668/236729944-0a66f699-689e-4cbb-a12a-860abdef2cf4.png)
 
 ![Dashboard Pg 2](https://user-images.githubusercontent.com/81607668/236729954-cecba4a6-fc90-4944-b27f-cfb9473422bf.png)
