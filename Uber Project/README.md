@@ -37,8 +37,8 @@ More info about dataset can be found here:
 
 ## Dashboard
 
-<img width="479" alt="Screenshot 2023-05-08 at 11 50 55 AM" src="https://user-images.githubusercontent.com/81607668/236729944-0a66f699-689e-4cbb-a12a-860abdef2cf4.png">
+![Dashoard Pg 1](https://user-images.githubusercontent.com/81607668/236729944-0a66f699-689e-4cbb-a12a-860abdef2cf4.png)
 
-<img width="477" alt="Screenshot 2023-05-08 at 11 51 05 AM" src="https://user-images.githubusercontent.com/81607668/236729954-cecba4a6-fc90-4944-b27f-cfb9473422bf.png">
+![Dashboard Pg 2](https://user-images.githubusercontent.com/81607668/236729954-cecba4a6-fc90-4944-b27f-cfb9473422bf.png)
 
 ***
