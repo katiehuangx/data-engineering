@@ -3,11 +3,10 @@
 ## Objective
 
 In this project, I designed and implemented an end-to-end data pipeline that consists of several stages:
-1. Extracted data from NYC Trip Record Data website and loaded it into **Google Cloud Storage** for further processing.
-2. Transformed the data using **Python** in **Jupyter Notebook**.
-3. Modeled the data using fact and dimensional data modeling concepts.
-4. Orchestrated the data pipeline on **Mage** and loaded the transformed data into **Google BigQuery**.
-5. Developed a dashboard on **Looker Studio**.
+1. Extracted data from NYC Trip Record Data website and loaded it into Google Cloud Storage for further processing.
+3. Transformed and modeled the data using fact and dimensional data modeling concepts using Python on Jupyter Notebook.
+4. Using ETL, I orchestrated the data pipeline on Mage and loaded the transformed data into Google BigQuery.
+5. Developed a dashboard on Looker Studio.
 
 ## Technologies
 
