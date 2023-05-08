@@ -11,7 +11,7 @@ In this project, I designed and implemented an end-to-end data pipeline that con
 ## Technologies
 
 To implement this data pipeline, I leveraged a range of technologies, including:
-- Programming language: Python, SQL
+- Language: Python, SQL
 - Extraction and transformation: Jupyter Notebook, Google BigQuery
 - Storage: Google Storage
 - Orchestration: [Mage](https://www.mage.ai)
