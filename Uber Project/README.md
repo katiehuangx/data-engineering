@@ -10,23 +10,23 @@ In this project, I designed and implemented an end-to-end data pipeline that con
 
 ## Technologies
 
-To implement this data pipeline, I leveraged a range of technologies, including:
+The following technologies are used to build this project:
 - Language: Python, SQL
 - Extraction and transformation: Jupyter Notebook, Google BigQuery
-- Storage: Google Storage
+- Storage: Google Cloud Storage
 - Orchestration: [Mage](https://www.mage.ai)
 - Dashboard: [Looker Studio](https://lookerstudio.google.com)
 
 ## Dataset Used
 
-TLC Trip Record Data Yellow and green taxi trip records include fields capturing pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts.
+This project uses the TLC Trip Record Data which include fields capturing pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts.
 
 More info about dataset can be found here:
 - Website: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
 - Data Dictionary: https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
 - Raw Data: https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/uber_data.csv
 
-## Data Pipeline
+## Data Pipeline Architecture
 
 <img width="897" alt="Screenshot 2023-05-08 at 11 49 09 AM" src="https://user-images.githubusercontent.com/81607668/236729698-65e193bc-75ee-4ea6-9040-f33f5f2958cb.png">
 
