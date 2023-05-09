@@ -8,6 +8,15 @@ In this project, I designed and implemented an end-to-end data pipeline that con
 4. Using ETL, I orchestrated the data pipeline on Mage and loaded the transformed data into Google BigQuery.
 5. Developed a dashboard on Looker Studio.
 
+## Dataset
+
+This project uses the TLC Trip Record Data which include fields capturing pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts.
+
+More info about dataset can be found here:
+- Website: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
+- Data Dictionary: https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
+- Raw Data: https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/uber_data.csv
+- 
 ## Technologies
 
 The following technologies are used to build this project:
@@ -16,15 +25,6 @@ The following technologies are used to build this project:
 - Storage: Google Cloud Storage
 - Orchestration: [Mage](https://www.mage.ai)
 - Dashboard: [Looker Studio](https://lookerstudio.google.com)
-
-## Dataset Used
-
-This project uses the TLC Trip Record Data which include fields capturing pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts.
-
-More info about dataset can be found here:
-- Website: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
-- Data Dictionary: https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
-- Raw Data: https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/uber_data.csv
 
 ## Data Pipeline Architecture
 
