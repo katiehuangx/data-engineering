@@ -8,6 +8,8 @@ In this project, I designed and implemented an end-to-end data pipeline that con
 4. Using ETL, I orchestrated the data pipeline on Mage and loaded the transformed data into Google BigQuery.
 5. Developed a dashboard on Looker Studio.
 
+As this is a data engineering project, my emphasis is primarily on the engineering aspect with a lesser emphasis on analytics and dashboard development.
+
 ## Dataset
 
 This project uses the TLC Trip Record Data which include fields capturing pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts.
