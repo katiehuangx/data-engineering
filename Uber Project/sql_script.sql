@@ -39,7 +39,10 @@ INNER JOIN `uber-project-385706.uber_data_engineering.payment_type_dim` AS pay
 
 -- ASSIGNMENT QUESTIONS
 -- Find the top 10 pickup location based on the number of trips
-SELECT pickup_latitude, pickup_longitude, COUNT(*) AS pickup_location_count
+SELECT 
+  pickup_latitude, 
+  pickup_longitude, 
+  COUNT(*) AS pickup_location_count
 FROM `uber-project-385706.uber_data_engineering.analytics_table`
 GROUP BY pickup_latitude, pickup_longitude
 ORDER BY pickup_location_count DESC
