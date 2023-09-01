@@ -39,9 +39,47 @@ Files in the following stages:
 - Step 3: Analytics - [SQL script](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/sql_script.sql)
 - Step 4: [Dashboard](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber_Dashboard.pdf)
 
-## Data Modelling
+### Data Modelling
 
 ![Data Model](https://user-images.githubusercontent.com/81607668/236725688-995b6049-26c1-440f-b523-7c6c10d507ba.png)
+
+### Running VM Instance
+
+Start the SSH instance. Run the following commands to install necessary libraries.
+
+```python
+# Install Python and pip 
+sudo apt-get install update
+
+sudo apt-get install python3-distutils
+
+sudo apt-get install python3-apt
+
+sudo apt-get install wget
+
+wget https://bootstrap.pypa.io/get-pip.py
+
+sudo python3 get-pip.py
+
+# Install Pandas
+sudo pip3 install pandas
+```
+
+<img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/3ce67bf1-b965-428e-8412-1efd3ce0c95f">
+
+```python 
+# Install Mage library
+sudo pip3 install mage-ai
+
+# Create new project
+mage start demo_project
+```
+
+Source: [https://github.com/mage-ai/mage-ai#using-pip-or-conda](https://github.com/mage-ai/mage-ai#using-pip-or-conda)
+
+
+
+
 
 ## Dashboard
 
