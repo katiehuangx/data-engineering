@@ -1,4 +1,4 @@
-# 🚗 Uber Data Engineering Project
+<img width="1438" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/ae8acb39-c66e-41f6-b81b-d1179121c0a4"># 🚗 Uber Data Engineering Project
 
 ## Objective
 
@@ -76,6 +76,26 @@ mage start demo_project
 ```
 
 Source: [https://github.com/mage-ai/mage-ai#using-pip-or-conda](https://github.com/mage-ai/mage-ai#using-pip-or-conda)
+
+<img width="901" alt="Screenshot 2023-09-03 at 3 43 27 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/2cfbdda6-4998-4dff-8c09-2f76c9b8a977">
+
+
+Conduct orchestration in Mage
+Extract, transform, load
+
+
+Download credentials from API & Credentials
+<img width="1438" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/a1c0eb10-9969-4afd-8af7-cae9fb8d9a3a">
+
+Run the pipelines in Mage AI
+
+Fact and dim tables are created in Google BigQuery
+<img width="1438" alt="Screenshot 2023-09-03 at 3 41 57 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/81106f7c-f912-462a-ba74-4b1e22120dc6">
+
+## Analysis
+
+<img width="1436" alt="Screenshot 2023-09-03 at 3 46 17 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/87fef0c1-f849-4b0e-8f2d-db68a989a06d">
+
 
 
 
