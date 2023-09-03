@@ -45,13 +45,37 @@ Files in the following stages:
 - Step 3: Analytics - [SQL script](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/sql_script.sql)
 - Step 4: [Dashboard](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber_Dashboard.pdf)
 
-### Data Modeling
+## Data Modeling
 
 Dataset is modeled based on the fact and dim data modeling concepts. 
 ![Data Model](https://user-images.githubusercontent.com/81607668/236725688-995b6049-26c1-440f-b523-7c6c10d507ba.png)
 
-I used Python to create the new tables from the original CSV file.
+used Python to create the new tables from the original CSV file.
 
+## Step 1: Cleaning and Transformation
+
+In this step, I load the CSV file into Jupyter Notebook and performed cleaning and transformation of data before modeling them into fact and dim tables.
+
+These are the cleaning and transformation tasks conducted:
+1. Convert tpep_pickup_datetime and tpep_dropoff_datetime into datetime type
+2. Remove duplicate and reset index
+
+<img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/83438f14-cae0-4278-8a33-5b536b487d90">
+
+
+Once above is done, I create the following fact and dim tables.
+
+<img width="1436" alt="Screenshot 2023-09-03 at 4 05 21 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/d1f961f5-dd28-4a5f-bfc9-1d739b85012c">
+
+<img width="1436" alt="Screenshot 2023-09-03 at 4 05 29 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/3265a206-132f-457f-8323-2c6f681fbf60">
+
+<img width="1436" alt="Screenshot 2023-09-03 at 4 05 35 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/a0555798-32a7-4c84-ac19-6336868dbf70">
+
+<img width="1436" alt="Screenshot 2023-09-03 at 4 05 40 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/f7483917-b5eb-400f-a9ea-8ca138db6604">
+
+<img width="1436" alt="Screenshot 2023-09-03 at 4 05 44 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/31fc871f-bdd3-4d2b-a0b5-04227188ec66">
+
+<img width="1436" alt="Screenshot 2023-09-03 at 4 05 53 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/ec020455-bb23-4be5-b3f9-92200ccebaae">
 
 
 ### Running VM Instance
