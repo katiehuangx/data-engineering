@@ -67,6 +67,8 @@ Here's the specific cleaning and transformation tasks that were performed:
 1. Converted `tpep_pickup_datetime` and `tpep_dropoff_datetime` columns into datetime format.
 2. Removed duplicates and reset the index.
 
+Link to the script: [https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber%20Data%20Engineering.ipynb](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber%20Data%20Engineering.ipynb)
+
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/83438f14-cae0-4278-8a33-5b536b487d90">
 
 After completing the above steps, I created the following fact and dimension tables below:
