@@ -14,7 +14,15 @@ The sections below will explain additional details on the technologies and files
 
 ## Table of Content
 
-
+- [Dataset Used](#dataset-used)
+- [Technologies](technologies)
+- [Data Pipeline Architecture](#data-pipeline-architecture)
+- [Date Modeling](#data-modeling)
+- [Step 1: Cleaning and Transformation](#step-1-cleaning-and-transformation)
+- [Step 2: Storage](#step-2-storage)
+- [Step 3: ETL / Orchestration](#step-3-etl--orchestration)
+- [Step 4: Analytics](#step-4-analytics)
+- [Step 5: Dashboard](#step-5-dashboard)
 
 ## Dataset Used
 
