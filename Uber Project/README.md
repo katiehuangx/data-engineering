@@ -1,23 +1,29 @@
 # 🚗 Uber Data Engineering Project
 
+Table of Content
+
+
+
 ## Objective
 
 In this project, I designed and implemented an end-to-end data pipeline that consists of several stages:
-1. Extracted data from NYC Trip Record Data website and loaded it into Google Cloud Storage for further processing.
+1. Extracted data from NYC Trip Record Data website and loaded into Google Cloud Storage for further processing.
 3. Transformed and modeled the data using fact and dimensional data modeling concepts using Python on Jupyter Notebook.
-4. Using ETL, I orchestrated the data pipeline on Mage and loaded the transformed data into Google BigQuery.
+4. Using ETL concept, I orchestrated the data pipeline on Mage AI and loaded the transformed data into Google BigQuery.
 5. Developed a dashboard on Looker Studio.
 
 As this is a data engineering project, my emphasis is primarily on the engineering aspect with a lesser emphasis on analytics and dashboard development.
+
+The sections below will explain additional details on the technologies and files utilized.
 
 ## Dataset
 
 This project uses the TLC Trip Record Data which include fields capturing pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts.
 
-More info about dataset can be found here:
+More info about dataset can be found in the following links:
 - Website: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
 - Data Dictionary: https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
-- Raw Data: https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/uber_data.csv
+- Raw Data (CSV): https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/uber_data.csv
 
 ## Technologies
 
@@ -25,7 +31,7 @@ The following technologies are used to build this project:
 - Language: Python, SQL
 - Extraction and transformation: Jupyter Notebook, Google BigQuery
 - Storage: Google Cloud Storage
-- Orchestration: [Mage](https://www.mage.ai)
+- Orchestration: [Mage AI](https://www.mage.ai)
 - Dashboard: [Looker Studio](https://lookerstudio.google.com)
 
 ## Data Pipeline Architecture
@@ -35,13 +41,18 @@ The following technologies are used to build this project:
 Files in the following stages:
 - Step 0: Cleaning and transformation - [Uber Data Engineering.ipynb](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber%20Data%20Engineering.ipynb)
 - Step 1: Storage
-- Step 2: ETL, Orchestration - Mage [extract](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_load_data.py), [transform](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_transformation.py), [export](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_gbq_load.py)
+- Step 2: ETL, Orchestration - Mage: [Extract](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_load_data.py), [Transform](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_transformation.py), [Load](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_gbq_load.py)
 - Step 3: Analytics - [SQL script](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/sql_script.sql)
 - Step 4: [Dashboard](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber_Dashboard.pdf)
 
-### Data Modelling
+### Data Modeling
 
+Dataset is modeled based on the fact and dim data modeling concepts. 
 ![Data Model](https://user-images.githubusercontent.com/81607668/236725688-995b6049-26c1-440f-b523-7c6c10d507ba.png)
+
+I used Python to create the new tables from the original CSV file.
+
+
 
 ### Running VM Instance
 
