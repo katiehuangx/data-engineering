@@ -55,33 +55,36 @@ Files in the following stages:
 
 ## Data Modeling
 
-Dataset is modeled based on the fact and dim data modeling concepts. 
-![Data Model](https://user-images.githubusercontent.com/81607668/236725688-995b6049-26c1-440f-b523-7c6c10d507ba.png)
+The datasets are designed using the principles of fact and dim data modeling concepts. 
 
-used Python to create the new tables from the original CSV file.
+![Data Model](https://user-images.githubusercontent.com/81607668/236725688-995b6049-26c1-440f-b523-7c6c10d507ba.png)
 
 ## Step 1: Cleaning and Transformation
 
-In this step, I load the CSV file into Jupyter Notebook and performed cleaning and transformation of data before modeling them into fact and dim tables.
+In this step, I loaded the CSV file into Jupyter Notebook and carried out data cleaning and transformation activities prior to organizing them into fact and dim tables.
 
-These are the cleaning and transformation tasks conducted:
-1. Convert tpep_pickup_datetime and tpep_dropoff_datetime into datetime type
-2. Remove duplicate and reset index
+Here's the specific cleaning and transformation tasks that were performed:
+1. Converted `tpep_pickup_datetime` and `tpep_dropoff_datetime` columns into datetime format.
+2. Removed duplicates and reset the index.
 
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/83438f14-cae0-4278-8a33-5b536b487d90">
 
-
-Once above is done, I create the following fact and dim tables.
+After completing the above steps, I created the following fact and dimension tables below:
 
 <img width="1436" alt="Screenshot 2023-09-03 at 4 05 21 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/d1f961f5-dd28-4a5f-bfc9-1d739b85012c">
 
+
 <img width="1436" alt="Screenshot 2023-09-03 at 4 05 29 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/3265a206-132f-457f-8323-2c6f681fbf60">
+
 
 <img width="1436" alt="Screenshot 2023-09-03 at 4 05 35 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/a0555798-32a7-4c84-ac19-6336868dbf70">
 
+
 <img width="1436" alt="Screenshot 2023-09-03 at 4 05 40 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/f7483917-b5eb-400f-a9ea-8ca138db6604">
 
+
 <img width="1436" alt="Screenshot 2023-09-03 at 4 05 44 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/31fc871f-bdd3-4d2b-a0b5-04227188ec66">
+
 
 <img width="1436" alt="Screenshot 2023-09-03 at 4 05 53 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/ec020455-bb23-4be5-b3f9-92200ccebaae">
 
@@ -91,7 +94,7 @@ Once above is done, I create the following fact and dim tables.
 
 ## Step 3: ETL / Orchestration
 
-1. First, I start the SSH instance and run the following commands below to install the necessary libraries.
+1. Begin by launching the SSH instance and running the following commands below to install the required libraries.
 
 <img width="1436" alt="Screenshot 2023-09-03 at 4 10 39 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/1bd9af4c-61aa-4ea5-a485-81b6a6b5d446">
 
@@ -120,7 +123,7 @@ sudo pip3 install pandas
 
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/3ce67bf1-b965-428e-8412-1efd3ce0c95f">
 
-2. Once completed, I run the commands below to install Mage AI library from the [Mage AI GitHub](https://github.com/mage-ai/mage-ai#using-pip-or-conda). Then, I create a new project named "uber_de_project".
+2. After that, I install the Mage AI library from the [Mage AI GitHub](https://github.com/mage-ai/mage-ai#using-pip-or-conda). Then, I create a new project called "uber_de_project".
 
 ```python 
 # Install Mage library
@@ -132,24 +135,24 @@ mage start demo_project
 
 <img width="901" alt="Screenshot 2023-09-03 at 3 43 27 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/2cfbdda6-4998-4dff-8c09-2f76c9b8a977">
 
-3. Now, it's time to conduct the orchestration in Mage by accessing the external IP address in a new table. Link format is: `<external IP address>:<port number>`.
+3. Next, I conduct orchestration in Mage by accessing the external IP address through a new tab. The link format is: `<external IP address>:<port number>`.
 
-Then, I create a new pipeline:
+After that, I create a new pipeline with the following stages:
 - Extract: [load_uber_data](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_load_data.py)
 - Transform: [transform_uber](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_transformation.py)
 - Load: [load_gbq](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_load_data.py)
 
 <img width="1438" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/ae8acb39-c66e-41f6-b81b-d1179121c0a4">
 
-Before running the Load pipeline, I download credentials from API & Credentials and update them in the `io_config.yaml` file in the same pipeline to authorize access for data to be loaded into Google BigQuery.
+Before executing the Load pipeline, I download credentials from Google API & Credentials and then update them accordingly in the `io_config.yaml` file within the same pipeline. This step is essential for granting authorization to access and load data into Google BigQuery.
 
 ## Step 4: Analytics
 
-Upon running the **Load** pipeline in Mage AI, the fact and dim tables are created in Google BigQuery.
+After running the Load pipeline in Mage, the fact and dim tables are generated in Google BigQuery.
 
 <img width="1438" alt="Screenshot 2023-09-03 at 3 41 57 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/81106f7c-f912-462a-ba74-4b1e22120dc6">
 
-These are the further analysis I ran:
+Here's the additional analyses I performed:
 1. Find the top 10 pickup locations based on the number of trips
 <img width="1436" alt="Screenshot 2023-09-03 at 3 46 17 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/87fef0c1-f849-4b0e-8f2d-db68a989a06d">
 
@@ -161,7 +164,7 @@ These are the further analysis I ran:
 
 ## Step 5: Dashboard
 
-Once the analysis are completed, I load the relevant tables into Looker Studio and developed a dashboard, which you can view [here](https://lookerstudio.google.com/s/s2Cv9HZiz_I).
+After completing the analysis, I loaded the relevant tables into Looker Studio and created a dashboard, which you can view [here](https://lookerstudio.google.com/s/s2Cv9HZiz_I).
 
 ![Dashoard Pg 1](https://user-images.githubusercontent.com/81607668/236729944-0a66f699-689e-4cbb-a12a-860abdef2cf4.png)
 
