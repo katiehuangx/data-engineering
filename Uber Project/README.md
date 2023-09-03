@@ -85,6 +85,8 @@ Once above is done, I create the following fact and dim tables.
 
 First, I start the SSH instance and run the following commands below to install the necessary libraries.
 
+<img width="1436" alt="Screenshot 2023-09-03 at 4 10 39 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/1bd9af4c-61aa-4ea5-a485-81b6a6b5d446">
+
 ```python
 # Install python and pip 
 sudo apt-get install update
@@ -108,13 +110,9 @@ sudo pip3 install google-cloud-bigquery
 sudo pip3 install pandas
 ```
 
-Once completed, I installed the Mage AI library from the [Mage AI GitHub](https://github.com/mage-ai/mage-ai#using-pip-or-conda](https://github.com/mage-ai/mage-ai#using-pip-or-conda).
-
-<img width="1436" alt="Screenshot 2023-09-03 at 4 10 39 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/1bd9af4c-61aa-4ea5-a485-81b6a6b5d446">
-
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/3ce67bf1-b965-428e-8412-1efd3ce0c95f">
 
-<img width="1438" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/ae8acb39-c66e-41f6-b81b-d1179121c0a4">
+Once completed, I run the commands below to install Mage AI library from the [Mage AI GitHub](https://github.com/mage-ai/mage-ai#using-pip-or-conda](https://github.com/mage-ai/mage-ai#using-pip-or-conda).
 
 ```python 
 # Install Mage library
@@ -124,14 +122,13 @@ sudo pip3 install mage-ai
 mage start demo_project
 ```
 
-Source: [https://github.com/mage-ai/mage-ai#using-pip-or-conda](https://github.com/mage-ai/mage-ai#using-pip-or-conda)
-
 <img width="901" alt="Screenshot 2023-09-03 at 3 43 27 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/2cfbdda6-4998-4dff-8c09-2f76c9b8a977">
 
+Now, it's time to conduct the orchestration in Mage.
 
-Conduct orchestration in Mage
-Extract, transform, load
+I accessed the external IP address.
 
+<img width="1438" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/ae8acb39-c66e-41f6-b81b-d1179121c0a4">
 
 Download credentials from API & Credentials
 <img width="1438" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/a1c0eb10-9969-4afd-8af7-cae9fb8d9a3a">
