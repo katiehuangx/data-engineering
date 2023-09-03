@@ -1,9 +1,5 @@
 # 🚗 Uber Data Engineering Project
 
-Table of Content
-
-
-
 ## Objective
 
 In this project, I designed and implemented an end-to-end data pipeline that consists of several stages:
@@ -16,7 +12,11 @@ As this is a data engineering project, my emphasis is primarily on the engineeri
 
 The sections below will explain additional details on the technologies and files utilized.
 
-## Dataset
+## Table of Content
+
+
+
+## Dataset Used
 
 This project uses the TLC Trip Record Data which include fields capturing pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts.
 
