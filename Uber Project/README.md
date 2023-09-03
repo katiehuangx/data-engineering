@@ -39,11 +39,11 @@ The following technologies are used to build this project:
 <img width="897" alt="Screenshot 2023-05-08 at 11 49 09 AM" src="https://user-images.githubusercontent.com/81607668/236729698-65e193bc-75ee-4ea6-9040-f33f5f2958cb.png">
 
 Files in the following stages:
-- Step 0: Cleaning and transformation - [Uber Data Engineering.ipynb](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber%20Data%20Engineering.ipynb)
-- Step 1: Storage
-- Step 2: ETL, Orchestration - Mage: [Extract](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_load_data.py), [Transform](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_transformation.py), [Load](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_gbq_load.py)
-- Step 3: Analytics - [SQL script](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/sql_script.sql)
-- Step 4: [Dashboard](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber_Dashboard.pdf)
+- Step 1: Cleaning and transformation - [Uber Data Engineering.ipynb](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber%20Data%20Engineering.ipynb)
+- Step 2: Storage
+- Step 3: ETL, Orchestration - Mage: [Extract](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_load_data.py), [Transform](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_transformation.py), [Load](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Mage/uber_gbq_load.py)
+- Step 4: Analytics - [SQL script](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/sql_script.sql)
+- Step 5: [Dashboard](https://github.com/katiehuangx/data-engineering/blob/main/Uber%20Project/Uber_Dashboard.pdf)
 
 ## Data Modeling
 
@@ -77,13 +77,16 @@ Once above is done, I create the following fact and dim tables.
 
 <img width="1436" alt="Screenshot 2023-09-03 at 4 05 53 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/ec020455-bb23-4be5-b3f9-92200ccebaae">
 
+## Step 2: Storage
 
-### Running VM Instance
+<img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/b776b804-a871-4a72-b1e5-b38b6d194bf3">
 
-Start the SSH instance. Run the following commands to install necessary libraries.
+## Step 3: ETL / Orchestration
+
+First, I start the SSH instance and run the following commands below to install the necessary libraries.
 
 ```python
-# Install Python and pip 
+# Install python and pip 
 sudo apt-get install update
 
 sudo apt-get install python3-distutils
@@ -96,9 +99,18 @@ wget https://bootstrap.pypa.io/get-pip.py
 
 sudo python3 get-pip.py
 
+# Install Google Cloud Library
+sudo pip3 install google-cloud
+
+sudo pip3 install google-cloud-bigquery
+
 # Install Pandas
 sudo pip3 install pandas
 ```
+
+Once completed, I installed the Mage AI library from the [Mage AI GitHub](https://github.com/mage-ai/mage-ai#using-pip-or-conda](https://github.com/mage-ai/mage-ai#using-pip-or-conda).
+
+<img width="1436" alt="Screenshot 2023-09-03 at 4 10 39 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/1bd9af4c-61aa-4ea5-a485-81b6a6b5d446">
 
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/3ce67bf1-b965-428e-8412-1efd3ce0c95f">
 
@@ -128,6 +140,9 @@ Run the pipelines in Mage AI
 
 Fact and dim tables are created in Google BigQuery
 <img width="1438" alt="Screenshot 2023-09-03 at 3 41 57 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/81106f7c-f912-462a-ba74-4b1e22120dc6">
+
+## Step 4: Analytics
+## Step 5: 
 
 ## Analysis
 
