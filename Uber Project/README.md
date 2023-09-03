@@ -1,4 +1,4 @@
-<img width="1438" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/ae8acb39-c66e-41f6-b81b-d1179121c0a4"># 🚗 Uber Data Engineering Project
+# 🚗 Uber Data Engineering Project
 
 ## Objective
 
@@ -67,6 +67,8 @@ sudo pip3 install pandas
 
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/3ce67bf1-b965-428e-8412-1efd3ce0c95f">
 
+<img width="1438" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/ae8acb39-c66e-41f6-b81b-d1179121c0a4">
+
 ```python 
 # Install Mage library
 sudo pip3 install mage-ai
@@ -96,6 +98,9 @@ Fact and dim tables are created in Google BigQuery
 
 <img width="1436" alt="Screenshot 2023-09-03 at 3 46 17 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/87fef0c1-f849-4b0e-8f2d-db68a989a06d">
 
+<img width="1436" alt="Screenshot 2023-09-03 at 3 47 48 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/5f563142-9d18-4019-8499-7d9958b7ec05">
+
+<img width="1436" alt="Screenshot 2023-09-03 at 3 48 52 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/bf8d4dea-0915-48fb-a673-e5b3d3f37e3f">
 
 
 
