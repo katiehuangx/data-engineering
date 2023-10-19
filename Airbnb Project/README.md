@@ -59,6 +59,23 @@ dbt debug # Ensure it says "All checks passed!"
 
 ## Create dbt Models
 
+Before we start, the models or SQL files in dbt are separated into layers:
+
+**1) Staging Models(Src)**
+- Stored in `models/s
+- Purpose: Ingest raw or lightly cleansed data from source (ie. Snowflake).
+- Work done on data: Minimal (change column name) or no transformation.
+
+**2) Dimension Models (Dim)**
+- Purpose: Models contain descriptive information about data ie. products, location, time.
+- Typically denormalized.
+- Work done on data: Filtering, grouping, aggregating, type casting, joins, defining categories (using CASE statement).
+
+**3) Fact Models (Fct)**
+- Purpose: Models store quantitative and analytical data ie. events, transactions, orders.
+- Contain measures like sales, revenue, quantity, etc to perform analytics or metrics calculations.
+- Work done on data: Aggregations, calculations
+
 ### Staging Layer and Models
 
 Create `src_listings` model (.sql) in `models/src` folder with the following SELECT statement. Click [here](https://discourse.getdbt.com/t/why-the-fishtown-sql-style-guide-uses-so-many-ctes/1091) to understand why we are "importing" the upstream data in CTEs.
@@ -84,7 +101,7 @@ FROM
   raw_listings
 ```
 
-To materialise models in dbt and Snowflake, run `dbt run` or for specific model `dbt run -m src_listings` in termimal.
+To materialise models in dbt and Snowflake, run `dbt run` or, to run a specific model `dbt run -m src_listings` in termimal.
 
 <img width="825" alt="Screenshot 2023-02-27 at 11 19 35 AM" src="https://user-images.githubusercontent.com/81607668/221465370-43ca1830-945c-4789-88ca-b8d48ed7a945.png">
 
@@ -121,13 +138,15 @@ SELECT
 FROM raw_hosts
 ```
 
-Run `dbt run` to materialise the views in dbt and Snowflake.
+Then, run `dbt run` to materialise the new models in dbt and Snowflake.
 <img width="828" alt="image" src="https://user-images.githubusercontent.com/81607668/221467527-563cc613-86a5-46d7-a3c8-77b8b1c76524.png">
 
-The **DEV** folder is created in Snowflake to contain all the dbt materialisations and the **Views** folder contains all 3 of the models. 
+In Snowflake, the **DEV** folder is created to contain all the dbt materialisations. All the newly created models are contained in the **Views** folder.
 <img width="1438" alt="Screenshot 2023-02-27 at 11 42 14 AM" src="https://user-images.githubusercontent.com/81607668/221467811-70144a38-8407-4d8f-b8d5-a0aa158444ac.png">
 
 ### Dim Models
+
+Create a `models/dim` folder to put in the dim models, which are the cleansed models from `src`, or staging layer. This keeps all the models well-organized. 
 
 ```sql
 -- models/dim/dim_listings_cleansed.sql
@@ -166,6 +185,9 @@ SELECT
     updated_at
 FROM src_hosts
 ```
+
+This is how the folder structure should look like now:
+<img width="286" alt="Screenshot 2023-10-19 at 3 06 43 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/a1ff5342-e38f-41c0-8aa1-9b65f09b49a0">
 
 
 ***
