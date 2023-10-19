@@ -61,7 +61,7 @@ dbt debug # Ensure it says "All checks passed!"
 
 ### Staging Layer
 
-Create `src_listings` model (.sql) in `models/src` folder with the following SELECT statement.
+Create `src_listings` model (.sql) in `models/src` folder with the following SELECT statement. Click [here](https://discourse.getdbt.com/t/why-the-fishtown-sql-style-guide-uses-so-many-ctes/1091) to understand why we are "importing" the upstream data in CTEs.
 
 ```sql
 -- models/src/src_listings.sql
