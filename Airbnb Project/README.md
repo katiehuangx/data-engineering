@@ -72,7 +72,11 @@ Before we start, the models or SQL files in dbt are separated into layers:
 - Contain measures like sales, revenue, quantity, etc to perform analytics or metrics calculations.
 - Work done on data: Aggregations, calculations
 
+‼️ Do not end the models (.sql) with `;` in dbt. It'll throw an error. 😮‍💨
+
 ## 1) Create Staging Models
+
+**`src_listings.sql`**
 
 Create `src_listings` model (.sql) in `models/src` folder with the following SELECT statement. Click [here](https://discourse.getdbt.com/t/why-the-fishtown-sql-style-guide-uses-so-many-ctes/1091) to understand why we are "importing" the upstream data in CTEs.
 
@@ -102,6 +106,9 @@ To materialise models in dbt and Snowflake, run `dbt run` or, to run a specific 
 <img width="825" alt="Screenshot 2023-02-27 at 11 19 35 AM" src="https://user-images.githubusercontent.com/81607668/221465370-43ca1830-945c-4789-88ca-b8d48ed7a945.png">
 
 Do the same with `src_reviews` and `src_hosts` models.
+
+**`src_reviews.sql`**
+
 ```sql
 -- File path: models/src/src_reviews.sql
 WITH raw_reviews AS (
@@ -117,6 +124,8 @@ SELECT
 	sentiment AS review_sentiment
 FROM raw_reviews
 ```
+
+**`src_hosts.sql`**
 
 ```sql
 -- File path: models/src/src_hosts.sql
@@ -144,6 +153,8 @@ In Snowflake, the **DEV** folder is created to contain all the dbt materialisati
 
 Create a `models/dim` folder to put in the dim models, which are the cleansed models from `src`, or staging layer. This keeps all the models well-organized. 
 
+**`dim_listings_cleansed.sql`**
+
 ```sql
 -- File path: models/dim/dim_listings_cleansed.sql
 WITH src_listings AS (
@@ -165,6 +176,8 @@ SELECT
     updated_at
 FROM src_listings
 ```
+
+**`dim_hosts_cleansed.sql`**
 
 ```sql
 -- File path: models/dim/dim_hosts_cleansed.sql
@@ -260,7 +273,6 @@ Now that all the models are created, we changed the materialisation of source mo
 
 dbt does not remove them as views, so we'll need to drop them in Snowflake.
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/8e5a69a1-5d64-47af-a125-6e31b26ca188">
-
 
 
 ***
