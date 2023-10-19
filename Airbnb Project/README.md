@@ -285,6 +285,28 @@ Here's a sample of a compiled model (`dim_hosts_cleansed.sql`):
 
 Can copy and run in Snowflake for debugging purposes.
 
+***
+
+### Final Materialisation for Models
+
+Once all the models have been cleansed, now we'll change the materialisation in dbt_project.yml.
+```yml
+models:
+  dbtlearn2:
+    +materialized: view # Applied to all models except dim and src
+    dim: 
+      +materialized: table # Applied to dim
+    src:
+      +materialized: ephemeral # Applied to src
+```
+
+Run `dbt run` and refresh Snowflake for the changes to take place.
+
+<img width="885" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/e209389f-24db-4814-a061-a3e83a2d83d1">
+
+You will not see src models in Snowflake as they are ephemeral materialisations and will not appear in Snowflake.
+<img width="1436" alt="Screenshot 2023-10-19 at 5 45 46 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/67b75619-40ac-4393-9592-6aa67cd49988">
+
 ### Snapshots
 
 Snapshots are created using a snapshot block with configs onto a SELECT statement.
