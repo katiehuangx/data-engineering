@@ -59,7 +59,7 @@ dbt debug # Ensure it says "All checks passed!"
 
 ## Create dbt Models
 
-### Staging Layer
+### Staging Layer and Models
 
 Create `src_listings` model (.sql) in `models/src` folder with the following SELECT statement. Click [here](https://discourse.getdbt.com/t/why-the-fishtown-sql-style-guide-uses-so-many-ctes/1091) to understand why we are "importing" the upstream data in CTEs.
 
@@ -127,9 +127,46 @@ Run `dbt run` to materialise the views in dbt and Snowflake.
 The **DEV** folder is created in Snowflake to contain all the dbt materialisations and the **Views** folder contains all 3 of the models. 
 <img width="1438" alt="Screenshot 2023-02-27 at 11 42 14 AM" src="https://user-images.githubusercontent.com/81607668/221467811-70144a38-8407-4d8f-b8d5-a0aa158444ac.png">
 
+### Dim Models
+
+```sql
+-- models/dim/dim_listings_cleansed.sql
+WITH src_listings AS (
+    SELECT *
+    FROM {{ref("src_listings")}}
+)
+
+SELECT
+    listing_id,
+    listing_name,
+    room_type,
+    CASE
+        WHEN minimum_nights = 0 THEN 1
+        ELSE minimum_nights 
+    END AS minimum_nights, -- ensure that the minimum stay is 1 night
+    host_id, 
+    LTRIM(price_str,'$')::NUMBER(10,2) AS price_per_night, -- remove "$" and cast into number with 2 decimals
+    created_at,
+    updated_at
+FROM src_listings
 ```
-code target/run/dbtlearn/models/dim/dim_listings_cleansed.sql
+
+```sql
+-- models/dim/dim_hosts_cleansed.sql
+WITH src_hosts AS (
+    SELECT *
+    FROM {{ref("src_hosts")}}
+)
+
+SELECT
+    host_id,
+    NVL(host_name,'Anonymous') AS host_name,
+    is_superhost,
+    created_at,
+    updated_at
+FROM src_hosts
 ```
+
 
 ***
 
