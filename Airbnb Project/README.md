@@ -274,8 +274,16 @@ Now that all the models are created, we changed the materialisation of source mo
 dbt does not remove them as views, so we'll need to drop them in Snowflake.
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/8e5a69a1-5d64-47af-a125-6e31b26ca188">
 
-
 ***
+
+### Compiled Models in Target
+
+To view the compiled models (.sql) in dbt, go to `target/compiled/dbtlearn/models/[dim/fct/src].sql`.
+
+Here's a sample of a compiled model (`dim_hosts_cleansed.sql`):
+<img width="1436" alt="Screenshot 2023-10-19 at 4 21 48 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/28524691-7fe5-4007-b677-9ff327455be8">
+
+Can copy and run in Snowflake for debugging purposes.
 
 ### Snapshots
 
