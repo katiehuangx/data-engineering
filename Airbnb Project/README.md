@@ -4,16 +4,11 @@
 
 Work in progress.
 
-## Tools and Technologies
+## Data Pipeline
 
-- Data warehouse: Snowflake
-- Transformation: dbt
-- BI: Prefect
+Data Warehouse (Snowflake) -> Transformation (dbt) -> Dashboard (Prefect)
 
-## Architecture
-
-Data pipeline: Data Warehouse (Snowflake) -> Transformation (dbt) -> BI Tool (Prefect)
-
+Steps:
 1. Ingest data into Snowflake.
 2. Perform transformation of data in dbt in which the cleansed models are materialised in Snowflake
 3.
