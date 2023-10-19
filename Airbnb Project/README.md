@@ -193,6 +193,7 @@ This is how the folder structure should look like now:
 ## 3) Create Fct Models
 
 **`fct_reviews.sql`**
+
 To update and append new data to the existing `fct_reviews` model in an incremental fashion. Click [here](https://docs.getdbt.com/docs/build/incremental-models#using-incremental-materializations) for the official dbt documentation on the incremental model.
 
 ```sql
@@ -226,6 +227,7 @@ WHERE review_text IS NOT NULL
 <img width="840" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/8be2fed5-23e4-4a68-b928-8c705616f5e8">
 
 **`dim_listings_w_hosts.sql`**
+
 ```sql
 -- File path: models/fct/fct_reviews.sql
 
@@ -258,8 +260,12 @@ LEFT JOIN hosts AS h
     ON l.host_id = h.host_id
 ```
 
-Now that all the models are created, we changed the materialisation of source models (ie. `src_hosts`, `src_listings`, and `src_reviews`) to ephemeral so that it's only materialised as a CTE and will not appear in the **Dev** folder in Snowflake.
-<img width="737" alt="Screenshot 2023-10-19 at 4 04 00 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/7606d7a8-52d7-4e43-beeb-f181989ed02e">
+Now that all the models are created, we changed the materialisation of source models (ie. `src_hosts`, `src_listings`, and `src_reviews`) to ephemeral in `dbt_project.yml` so that it will be materialised as a CTE and will not appear in the **Dev** folder in Snowflake. 
+<img width="1436" alt="Screenshot 2023-10-19 at 4 15 05 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/55d78ff3-ac33-43aa-aa45-b24ef619dbaf">
+
+dbt does not remove them as views, so we'll need to drop them in Snowflake.
+<img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/8e5a69a1-5d64-47af-a125-6e31b26ca188">
+
 
 
 ***
