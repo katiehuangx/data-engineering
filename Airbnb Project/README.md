@@ -23,9 +23,41 @@ Data pipeline: Data Warehouse (Snowflake) -> Transformation (dbt) -> BI Tool (Pr
 
 <img width="1371" alt="image" src="https://user-images.githubusercontent.com/81607668/223373076-a320ca6e-b58c-4421-b41e-cda991365772.png">
 
-## Setup
+## Setup virtual environment and dbt
 
-### Create Staging Models
+Create a virtual environment by running the commands below:
+```bash
+# Create the virtual environment. Ensure that you have "cd" in the desired project's folder.
+python3 -m venv venv # venv is the name of the virtual environment
+
+# Activate the newly created virtual environment "venv"
+source venv/bin/activate
+```
+
+Install dbt-snowflake library:
+```bash
+pip3 install dbt-snowflake
+dbt # Run dbt to confirm that dbt is installed and working. You'll see a list of help guides.
+```
+
+Create a dbt project
+```bash
+dbt init dbtlearn # dbtlearn is the project name
+
+type: snowflake
+account: https://<take this value>.snowflakecomputing.com
+user: <username in Snowflake>
+password: <password in Snowflake>
+role: <role in Snowflake>
+warehouse: <warehouse in Snowflake> # Uppercase/lowercase-sensitive
+database: <database in Snowflake> # Uppercase/lowercase-sensitive
+schema: <schema in Snowflake> # Uppercase/lowercase-sensitive
+
+# To check that the project has all the files it needs
+dbt debug # Ensure it says "All checks passed!"
+```
+
+## Create dbt Models
 
 Create a `src_listings` model (.sql) in `models/src` folder with the following query in VS Code editor. Save it.
 
