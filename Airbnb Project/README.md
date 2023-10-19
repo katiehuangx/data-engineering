@@ -64,7 +64,8 @@ Create a `src_listings` model (.sql) in `models/src` folder with the following q
 ```sql
 -- models/src/src_listings.sql
 WITH raw_listings AS (
-	SELECT * FROM AIRBNB.RAW.RAW_LISTINGS
+	SELECT *
+	FROM AIRBNB.RAW.RAW_LISTINGS
 )
 
 SELECT 
@@ -89,30 +90,32 @@ Do the same with `src_reviews` and `src_hosts` models.
 ```sql
 -- models/src/src_reviews.sql
 WITH raw_reviews AS (
-	SELECT * FROM AIRBNB.RAW.RAW_REVIEWS
+	SELECT *
+	FROM AIRBNB.RAW.RAW_REVIEWS
 )
 
 SELECT
-    listing_id,
-    date AS review_date,
-    reviewer_name,
-    comments AS review_text,
-    sentiment AS review_sentiment
+	listing_id,
+	date AS review_date,
+	reviewer_name,
+	comments AS review_text,
+	sentiment AS review_sentiment
 FROM raw_reviews
 ```
 
 ```sql
 -- models/src/src_hosts.sql
 WITH raw_hosts AS (
-	SELECT * FROM AIRBNB.RAW.RAW_HOSTS
+	SELECT *
+	FROM AIRBNB.RAW.RAW_HOSTS
 )
 
 SELECT
-    id AS host_id,
-    name AS host_name,
-    is_superhost,
-    created_at,
-    updated_at
+	id AS host_id,
+	name AS host_name,
+	is_superhost,
+	created_at,
+	updated_at
 FROM raw_hosts
 ```
 
