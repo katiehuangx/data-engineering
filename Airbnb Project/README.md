@@ -82,7 +82,7 @@ Before we start, the models or SQL files in dbt are separated into layers:
 Create `src_listings` model (.sql) in `models/src` folder with the following SELECT statement. Click [here](https://discourse.getdbt.com/t/why-the-fishtown-sql-style-guide-uses-so-many-ctes/1091) to understand why we are "importing" the upstream data in CTEs.
 
 ```sql
--- models/src/src_listings.sql
+-- File path: models/src/src_listings.sql
 WITH raw_listings AS (
 	SELECT *
 	FROM AIRBNB.RAW.RAW_LISTINGS
@@ -108,7 +108,7 @@ To materialise models in dbt and Snowflake, run `dbt run` or, to run a specific 
 
 Do the same with `src_reviews` and `src_hosts` models.
 ```sql
--- models/src/src_reviews.sql
+-- File path: models/src/src_reviews.sql
 WITH raw_reviews AS (
 	SELECT *
 	FROM AIRBNB.RAW.RAW_REVIEWS
@@ -124,7 +124,7 @@ FROM raw_reviews
 ```
 
 ```sql
--- models/src/src_hosts.sql
+-- File path: models/src/src_hosts.sql
 WITH raw_hosts AS (
 	SELECT *
 	FROM AIRBNB.RAW.RAW_HOSTS
@@ -150,7 +150,7 @@ In Snowflake, the **DEV** folder is created to contain all the dbt materialisati
 Create a `models/dim` folder to put in the dim models, which are the cleansed models from `src`, or staging layer. This keeps all the models well-organized. 
 
 ```sql
--- models/dim/dim_listings_cleansed.sql
+-- File path: models/dim/dim_listings_cleansed.sql
 WITH src_listings AS (
     SELECT *
     FROM {{ref("src_listings")}}
@@ -172,7 +172,7 @@ FROM src_listings
 ```
 
 ```sql
--- models/dim/dim_hosts_cleansed.sql
+-- File path: models/dim/dim_hosts_cleansed.sql
 WITH src_hosts AS (
     SELECT *
     FROM {{ref("src_hosts")}}
@@ -190,7 +190,77 @@ FROM src_hosts
 This is how the folder structure should look like now:
 <img width="286" alt="Screenshot 2023-10-19 at 3 06 43 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/a1ff5342-e38f-41c0-8aa1-9b65f09b49a0">
 
-## 3) Create 
+## 3) Create Fct Models
+
+**`fct_reviews.sql`**
+To update and append new data to the existing `fct_reviews` model in an incremental fashion. Click [here](https://docs.getdbt.com/docs/build/incremental-models#using-incremental-materializations) for the official dbt documentation on the incremental model.
+
+```sql
+-- File path: models/fct/fct_reviews.sql
+
+-- Macro configuration to materialise model incrementally: 
+{{
+    config(
+        materialized='incremental',
+        on_schema_changes='fail'
+    )
+}}
+
+
+WITH src_reviews AS (
+    SELECT *
+    FROM {{ref("src_reviews")}}
+)
+
+SELECT *
+FROM src_reviews
+WHERE review_text IS NOT NULL
+{% if is_incremental() %}
+  -- This filter will only be applied on an incremental run.
+  -- If there are rows with review_date greater than the most recent review_date in this model, select row and add into {{ this }} model.
+  -- This condition ensures that only new or updated records since the last dbt run are included.
+  AND review_date > (select MAX(review_date) FROM {{ this }})
+{% endif %}
+```
+
+<img width="840" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/8be2fed5-23e4-4a68-b928-8c705616f5e8">
+
+**`dim_listings_w_hosts.sql`**
+```sql
+-- File path: models/fct/fct_reviews.sql
+
+WITH 
+
+listings AS (
+    SELECT *
+    FROM {{ ref("dim_listings_cleansed")}}
+),
+
+hosts AS (
+    SELECT *
+    FROM {{ ref("dim_hosts_cleansed")}}
+)
+
+SELECT
+    l.listing_id,
+    l.listing_name,
+    l.room_type,
+    l.minimum_nights,
+    l.price_per_night,
+    l.host_id,
+    h.host_name,
+    h.is_superhost AS host_is_superhost,
+    l.created_at,
+    GREATEST(l.updated_at, h.updated_at) AS updated_at -- Keep the most recent updated date
+
+FROM listings AS l
+LEFT JOIN hosts AS h
+    ON l.host_id = h.host_id
+```
+
+Now that all the models are created, we changed the materialisation of source models (ie. `src_hosts`, `src_listings`, and `src_reviews`) to ephemeral so that it's only materialised as a CTE and will not appear in the **Dev** folder in Snowflake.
+<img width="737" alt="Screenshot 2023-10-19 at 4 04 00 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/7606d7a8-52d7-4e43-beeb-f181989ed02e">
+
 
 ***
 
