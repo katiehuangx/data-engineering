@@ -14,9 +14,8 @@ Work in progress.
 
 Data pipeline: Data Warehouse (Snowflake) -> Transformation (dbt) -> BI Tool (Prefect)
 
-**Data Flow**
-1.
-2.
+1. Ingest data into Snowflake.
+2. Perform transformation of data in dbt in which the cleansed models are materialised in Snowflake
 3.
 
 **DAG**
