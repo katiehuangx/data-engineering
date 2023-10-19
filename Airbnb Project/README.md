@@ -22,6 +22,8 @@ Data pipeline: Data Warehouse (Snowflake) -> Transformation (dbt) -> BI Tool (Pr
 
 <img width="1371" alt="image" src="https://user-images.githubusercontent.com/81607668/223373076-a320ca6e-b58c-4421-b41e-cda991365772.png">
 
+**
+
 ## Setup virtual environment and dbt
 
 Create a virtual environment by running the commands below:
@@ -60,7 +62,7 @@ dbt debug # Ensure it says "All checks passed!"
 
 Before we start, the models or SQL files in dbt are separated into layers:
 
-**1) Staging Models(Src)**
+**1) Staging Models (Src)**
 - Stored in `models/s
 - Purpose: Ingest raw or lightly cleansed data from source (ie. Snowflake).
 - Work done on data: Minimal (change column name) or no transformation.
@@ -75,7 +77,7 @@ Before we start, the models or SQL files in dbt are separated into layers:
 - Contain measures like sales, revenue, quantity, etc to perform analytics or metrics calculations.
 - Work done on data: Aggregations, calculations
 
-### Staging Layer and Models
+## 1) Create Staging Models
 
 Create `src_listings` model (.sql) in `models/src` folder with the following SELECT statement. Click [here](https://discourse.getdbt.com/t/why-the-fishtown-sql-style-guide-uses-so-many-ctes/1091) to understand why we are "importing" the upstream data in CTEs.
 
@@ -143,7 +145,7 @@ Then, run `dbt run` to materialise the new models in dbt and Snowflake.
 In Snowflake, the **DEV** folder is created to contain all the dbt materialisations. All the newly created models are contained in the **Views** folder.
 <img width="1438" alt="Screenshot 2023-02-27 at 11 42 14 AM" src="https://user-images.githubusercontent.com/81607668/221467811-70144a38-8407-4d8f-b8d5-a0aa158444ac.png">
 
-### Dim Models
+## 2) Create Dim Models
 
 Create a `models/dim` folder to put in the dim models, which are the cleansed models from `src`, or staging layer. This keeps all the models well-organized. 
 
@@ -188,6 +190,7 @@ FROM src_hosts
 This is how the folder structure should look like now:
 <img width="286" alt="Screenshot 2023-10-19 at 3 06 43 PM" src="https://github.com/katiehuangx/data-engineering/assets/81607668/a1ff5342-e38f-41c0-8aa1-9b65f09b49a0">
 
+## 3) Create 
 
 ***
 
