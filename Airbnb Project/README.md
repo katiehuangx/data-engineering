@@ -274,6 +274,23 @@ Now that all the models are created, we changed the materialisation of source mo
 dbt does not remove them as views, so we'll need to drop them in Snowflake.
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/8e5a69a1-5d64-47af-a125-6e31b26ca188">
 
+4) Uploading CSV from S3
+
+Run the command to copy the `seed_full_moon_dates.csv` file from S3 to the project's seed folder.
+
+```bash
+curl https://dbtlearn.s3.us-east-2.amazonaws.com/seed_full_moon_dates.csv -o seeds/seed_full_moon_dates.csv
+```
+
+Then, run `dbt seed` to populate the CSV as a Table in Snowflake.
+
+<img width="968" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/6e0373d4-9337-4688-a7cb-bc518db1224a">
+
+The `seed_full_moon_dates.csv` is updated in Snowflake.
+<img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/2ad8b9de-a4c8-4a64-9bb1-ba6f25efff08">
+
+
+
 ***
 
 ### Compiled Models in Target
