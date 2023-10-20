@@ -274,7 +274,7 @@ Now that all the models are created, we changed the materialisation of source mo
 dbt does not remove them as views, so we'll need to drop them in Snowflake.
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/8e5a69a1-5d64-47af-a125-6e31b26ca188">
 
-4) Uploading CSV from S3
+## 4) Uploading CSV from S3
 
 Run the command to copy the `seed_full_moon_dates.csv` file from S3 to the project's seed folder.
 
@@ -289,10 +289,50 @@ Then, run `dbt seed` to populate the CSV as a Table in Snowflake.
 The `seed_full_moon_dates.csv` is updated in Snowflake.
 <img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/2ad8b9de-a4c8-4a64-9bb1-ba6f25efff08">
 
-
-
 ***
 
+## Change Source 
+
+Instead of referencing the exact table in Snowflake, we create a `source.yml` which contains the references of the Snowflake table and give it an alias which we can use in dbt.
+
+Create a `source.yml` in `/models` folder.
+<img width="1436" alt="image" src="https://github.com/katiehuangx/data-engineering/assets/81607668/150d33e1-9895-40b8-80ea-490655c3910f">
+
+Update the models which are using the exact table reference. For example, in the `src_hosts.sql` model, I update
+
+from:
+```sql
+WITH RAW_HOSTS AS (
+    SELECT *
+    FROM AIRBNB.RAW.RAW_HOSTS
+)
+
+SELECT
+    id AS host_id,
+    name AS host_name,
+    is_superhost,
+    created_at,
+    updated_at
+
+FROM RAW_HOSTS
+```
+
+to:
+```sql
+WITH RAW_HOSTS AS (
+    SELECT *
+    FROM {{ source ('airbnb', 'hosts')}}
+)
+
+SELECT
+    id AS host_id,
+    name AS host_name,
+    is_superhost,
+    created_at,
+    updated_at
+
+FROM RAW_HOSTS
+```
 ### Compiled Models in Target
 
 To view the compiled models (.sql) in dbt, go to `target/compiled/dbtlearn/models/[dim/fct/src].sql`.
